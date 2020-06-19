@@ -1,5 +1,6 @@
 const app = new PIXI.Application({
-  backgroundColor: 0x1099bb
+  backgroundColor: 0x1099bb,
+  antialias: true
 });
 document.body.appendChild(app.view);
 
@@ -17,7 +18,7 @@ for (let i = 0; i < 4; i++) {
   );
 }
 
-const createGraphic=function(){
+function createGraphic(){
   var graphics = new PIXI.Graphics();
   graphics.beginFill(0x1099bb);
   graphics.lineStyle(2, 0xffd900, 1);
@@ -30,7 +31,6 @@ const createGraphic=function(){
   app.stage.addChild(graphics);
 }
 
-createGraphic()
 
 function createBunny(x, y) {
   points.push({x,y})
@@ -74,8 +74,10 @@ function createBunny(x, y) {
   bunny.x = x;
   bunny.y = y;
 
+  createGraphic()
   // add it to the stage
   app.stage.addChild(bunny);
+  
 }
 
 function onDragStart(event) {
@@ -92,6 +94,7 @@ function onDragEnd() {
   this.dragging = false;
   // set the interaction data to null
   this.data = null;
+  
 }
 
 function onDragMove() {
@@ -101,6 +104,6 @@ function onDragMove() {
     this.y = newPosition.y;
     points[this.index].x=newPosition.x;
     points[this.index].y=newPosition.y;
-    createGraphic()
   }
+  createGraphic()
 }
