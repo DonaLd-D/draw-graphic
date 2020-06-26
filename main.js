@@ -2,6 +2,9 @@ const app = new PIXI.Application({
   backgroundColor: 0x1099bb,
   antialias: true
 });
+
+var graphics = new PIXI.Graphics();
+
 app.renderer.view.style.position = "absolute";
 app.renderer.view.style.display = "block";
 app.renderer.autoResize = true;
@@ -23,9 +26,9 @@ for (let i = 0; i < 4; i++) {
 }
 
 function createGraphic(){
-  var graphics = new PIXI.Graphics();
-  graphics.beginFill(0x1099bb);
+  graphics.clear()
   graphics.lineStyle(2, 0xffd900, 1);
+  // graphics.beginFill(0x1099bb);
   graphics.moveTo(points[0].x, points[0].y);
   points.forEach(function (i) {
       graphics.lineTo(i.x, i.y);
@@ -34,7 +37,6 @@ function createGraphic(){
   graphics.endFill();
   app.stage.addChild(graphics);
 }
-
 
 function createBunny(x, y) {
   points.push({x,y})
@@ -78,10 +80,9 @@ function createBunny(x, y) {
   bunny.x = x;
   bunny.y = y;
 
-  createGraphic()
   // add it to the stage
   app.stage.addChild(bunny);
-  
+  createGraphic()
 }
 
 function onDragStart(event) {
